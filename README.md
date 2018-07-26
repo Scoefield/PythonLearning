@@ -1,2 +1,2 @@
 # PythonLearning
-My some about python learning
+Some about my python learning demo
