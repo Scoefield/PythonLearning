@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Upload</title>
+    <!--必要样式-->
+    <link type="text/css" rel="stylesheet" href="http://yanshi.sucaihuo.com/jquery/28/2866/demo/css/styles.css">
+    <!-- <link type="text/css" rel="stylesheet" href="http://yanshi.sucaihuo.com/jquery/28/2866/demo/css/demo.css"> -->
+
+    <body>
+        <!-- <canvas class="pg-canvas" width="571" height="647"></canvas> -->
+        <form class="form-inline" method="post" action="{% url 'myapp:upload_action' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="login">
+            <div class="login_title">
+                <span><font size="4">Please upload the mp3 file</font></span>
+            </div>
+            <div class="login_fields">
+                <div class="login_fields__user">
+                    <div class="icon">
+                        <img alt="" src="http://yanshi.sucaihuo.com/jquery/28/2866/demo/img/user_icon_copy.png">
+                    </div>
+                    <input type="text" style="font-size:16px" id="ansID" name="ansID" placeholder="請輸入試卷ID" />
+                    <div class="validation">
+                        <img alt="" src="img/tick.png">
+                    </div>
+                </div><br>
+                <div class="login_fields__password">
+                    <div class="icon">
+                        <img alt="" src="img/lock_icon_copy.png">
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="file" name="testmp3" />
+                    <div class="validation">
+                        <img alt="" src="img/tick.png">
+                    </div>
+                </div>
+                <br>
+                <div class="login_fields__submit">
+                    <input type="submit" style="font-size:13px" value="Upload" />
+                    <!-- <input type="button" value="登录"> -->
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <p><font size="3" >Welcom to the seaskylight!</font></p>
+            </div>
+        </div>
+        </form>
+    </body >
+</html >

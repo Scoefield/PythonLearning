@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>评分系统接口</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script language="javascript" type="text/javascript">
+        var flag = 0;
+        function autoPlay() {
+            flag = 1;
+            var myAuto = document.getElementById('myaudio');
+            myAuto.load();
+            myAuto.play();
+        }
+        function closePlay() {
+            var myAuto = document.getElementById('myaudio');
+            if(flag == 1)
+            {
+                flag = 0;
+                myAuto.pause();
+            }       
+            else
+            {
+                flag = 1;
+                myAuto.play();
+            }               
+        }
+    </script>
+
+</head>
+<body>
+
+<style>
+body{min-height:300px;padding-top:90px;background: #f6f6f6;}
+.container{width:80%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
+.CodeMirror{min-height:300px;;font-family: Menlo,Monaco,Consolas,"Andale Mono","lucida console","Courier New",monospace;}#textareaCode{min-height:300px}#iframeResult{display: block;overflow: hidden;border:0!important;min-width:100px;width:100%;min-height:300px;background-color:#fff}@media screen and (max-width:860px){#textareaCode{height:300px}.CodeMirror{height:300px;font-family: Menlo,Monaco,Consolas,"Andale Mono","lucida console","Courier New",monospace;}#iframeResult{height:300px}.form-inline{padding:6px 0 2px 0}}.logo h1{background-image:url(/images/logo-domain-white.png);background-repeat:no-repeat;text-indent:-9999px;width:160px;height:39px;margin-top:10px;display:block}
+</style>
+
+<nav class="navbar navbar-default navbar-fixed-top" style="background: #96b97d;"></nav>
+
+<!-- <audio src={{openmp3name}} controls="controls">
+    Your browser does not support the audio element.
+</audio> -->
+
+<div class="container" >           
+        <div class="form-group">
+            &nbsp;&nbsp;
+            <audio src={{openmp3name}} id="myaudio" controls="controls" loop="false">
+                    Your browser does not support the audio element.
+            </audio> &nbsp;&nbsp;
+            <!-- <input type="button" onclick="autoPlay()" value="重新播放" /> &nbsp;&nbsp; -->
+            <button type="button" onclick="autoPlay()" style="background-color: #96b97d;width: 90px;height: 35px">重新播放</button> &nbsp
+            <!-- <input type="button" onclick="closePlay()" value="播放/暂停" /> -->
+            <button type="button" onclick="closePlay()" style="background-color: #96b97d;width: 90px;height: 35px">播放/暂停</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="gtscore">得分：</label><input type="text" style="width:100px;" value={{pred}} />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="flscore">满分：</label><input type="text" style="width:100px;" value="5" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="stime">耗时：</label><input type="text" style="width:100px;" value={{endtime}} /> 
+        </div>                
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form-inline">
+                    <div class="row">
+                    <div class="col-xs-6">
+                       <button type="button" class="btn btn-default" style="background-color: #96b97d;width: 90px;height: 38px">标准文本：</button>
+                    </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <textarea class="form-control"  id="textareaCode" name="textareaCode">        {{ stdlines }}
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form-inline">
+                    <div class="row">
+                    <div class="col-xs-6">
+                       <button type="button" class="btn btn-default" style="background-color: #96b97d;width: 90px;height: 38px">识别文本：</button>
+                    </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <textarea class="form-control"  id="textareaCode" name="textareaCode">       {{ reglines }}
+                    </textarea>
+                </div>
+            </div>
+        </div>
+	</div>
+
+	<footer>
+		<div class="row">
+			<div class="col-sm-12">
+        <div style="text-align: center;">
+<!-- 右侧滚动条 -->
+        <ins class="adsbygoogle"
+            style="display:inline-block;min-width:300px;max-width:970px;width:100%;height:90px"
+            data-ad-client="ca-pub-5751451760833794"
+            data-ad-slot="6979016065">
+        </ins>
+        <hr>
+		<p>Copyright © 2018<a target="_blank" href="">海云天科技-创新研究院</a></p>
+        </div>
+			</div>
+		</div>
+	</footer>
+</div>
+
+</body>
+</html>

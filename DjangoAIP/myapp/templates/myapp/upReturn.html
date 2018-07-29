@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>评分系统接口</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script language="javascript" type="text/javascript">
+        var flag = 0;
+        function autoPlay() {
+            flag = 1;
+            var myAuto = document.getElementById('myaudio');
+            myAuto.load();
+            myAuto.play();
+        }
+        function closePlay() {
+            var myAuto = document.getElementById('myaudio');
+            if(flag == 1)
+            {
+                flag = 0;
+                myAuto.pause();
+            }       
+            else
+            {
+                flag = 1;
+                myAuto.play();
+            }               
+        }
+
+        window.onload = function(){
+                            // var insertText1 = '<table><tr><td><font style="font-size:16px;color:green">heool</font></td></tr></table>';
+                            // var insertTest2 = '<font style="font-size:16px;color:green">hello</font>';
+                            var astd = '<font style="font-size:18px;color:blue">&nbsp;';
+                            var endfont = '</font>';
+                            var areg = '<font style="font-size:18px;color:black">&nbsp;';
+                            var aend = '<font style="font-size:18px;color:red">&nbsp;';
+                            var end_stdwords = {{ end_stdwords|safe }};
+                            var end_regwords = {{ end_regwords|safe }};
+                            var showtext1 = document.getElementById("showtext1");
+                            var showtext2 = document.getElementById("showtext2");
+                            var count1 = 0;
+                            var count2 = 0;
+                            var lengthcount1 = 0;
+                            var lengthcount2 = 0;
+                            var last_lgcount1 = 0;
+                            var last_lgcount2 = 0;
+                            var cut_lgcout1 = 0;
+                            var cut_lgcout2 = 0;
+                            var temp1 = 0;
+                            var temp2 = 0;
+                            var quyu = 0;
+                            var quyu2 = 0;
+                            var parleng1 = 0;
+                            var parleng2 = 0;
+                            var brcount = 45;
+                            for( var stdindex in end_stdwords)
+                            {
+                                var stdline = end_stdwords[stdindex];
+                                lengthcount1 += stdline.length;
+                                parleng1 = parseInt(lengthcount1/brcount);  
+                                quyu = (lengthcount1 % brcount);
+                                
+                                if (stdline.substring(0,1)=='<') {
+                                    if(parleng1 != temp1){
+                                        if(quyu == 0){
+                                            showtext1.innerHTML += (astd + stdline.substring(1,stdline.length-1) + endfont + "<br>");
+                                        }else{
+                                            cut_lgcout1 = (parleng1*brcount - last_lgcount1);
+                                            showtext1.innerHTML += (astd + stdline.substring(1,cut_lgcout1) + stdline.substring(cut_lgcout1,stdline.length-1) + endfont + "<br>");
+                                        }
+                                        //showtext1.innerHTML += "<br>";
+                                        temp1 = parleng1;
+                                    }else{
+                                        showtext1.innerHTML += (astd + stdline.substring(1,stdline.length-1) + endfont);
+                                    }
+                                }
+                                else {
+                                    //showtext1.innerHTML += (areg + stdline + breg); 
+                                    if(parleng1 != temp1){
+                                        cut_lgcout1 = (parleng1*brcount - last_lgcount1);
+                                        showtext1.innerHTML += (areg + stdline.substring(0,cut_lgcout1) + stdline.substring(cut_lgcout1,stdline.length) + endfont + "<br>");
+                                        temp1 = parleng1;
+                                    }else{
+                                        showtext1.innerHTML += (areg + stdline + endfont);
+                                    }
+                                }
+                                last_lgcount1 = lengthcount1;
+                            }
+
+                            for( var regindex in end_regwords)
+                            {
+                                var regline = end_regwords[regindex];
+                                lengthcount2 += regline.length;
+                                parleng2 = parseInt(lengthcount2/brcount);
+                                quyu2 = (lengthcount2 % brcount);
+                                
+                                if (regline.substring(0,1)=='<') {
+                                    //showtext2.innerHTML += (aend + regline.substring(1,regline.length-1) + bend);
+                                    if(parleng2 != temp2){
+                                        if(quyu2 == 0){
+                                            showtext2.innerHTML += (aend + regline.substring(1,regline.length-1) + endfont + "<br>");
+                                        }else{
+                                            cut_lgcout2 = (parleng2*brcount - last_lgcount2);
+                                            showtext2.innerHTML += (aend + regline.substring(1,cut_lgcout2) + regline.substring(cut_lgcout2,regline.length-1) + endfont + "<br>");
+                                        }
+                                        //showtext1.innerHTML += "<br>";
+                                        temp2 = parleng2;
+                                    }else{
+                                        showtext2.innerHTML += (aend + regline.substring(1,regline.length-1) + endfont);
+                                    }
+                                }
+                                else {
+                                    //showtext2.innerHTML += (areg + regline + breg); 
+                                    if(parleng2 != temp2){
+                                        cut_lgcout2 = (parleng2*brcount - last_lgcount2);
+                                        showtext2.innerHTML += (areg + regline.substring(0,cut_lgcout1) + regline.substring(cut_lgcout1,stdline.length) + endfont + "<br>");
+                                        temp2 = parleng2;
+                                    }else{
+                                        showtext2.innerHTML += (areg + regline + endfont);
+                                    }
+                                }
+                                last_lgcount2 = lengthcount2;
+                            }
+                        }
+    </script>
+
+</head>
+<body>
+
+<style>
+body{min-height:300px;padding-top:90px;background: #f6f6f6;}
+.container{width:82%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
+.CodeMirror{min-height:300px;;font-family: Menlo,Monaco,Consolas,"Andale Mono","lucida console","Courier New",monospace;}
+#textareaCode{min-height:330px}#iframeResult{display: block;overflow: hidden;border:0!important;min-width:100px;width:100%;min-height:300px;background-color:#fff}@media screen and (max-width:860px){#textareaCode{height:300px}
+.CodeMirror{height:300px;font-family: Menlo,Monaco,Consolas,"Andale Mono","lucida console","Courier New",monospace;}
+#iframeResult{height:300px}.form-inline{padding:6px 0 2px 0}}.logo h1{background-image:url(/images/logo-domain-white.png);background-repeat:no-repeat;text-indent:-9999px;width:160px;height:39px;margin-top:10px;display:block}
+</style>
+
+<nav class="navbar navbar-default navbar-fixed-top" style="background: #96b97d;"></nav>
+
+<!-- <audio src={{openmp3name}} controls="controls">
+    Your browser does not support the audio element.
+</audio> -->
+
+<div class="container" >           
+        <div class="form-group">
+            &nbsp;&nbsp;
+            <audio src={{openmp3name}} id="myaudio" controls="controls" loop="false">
+                    Your browser does not support the audio element.
+            </audio> &nbsp;&nbsp;
+            <!-- <input type="button" onclick="autoPlay()" value="重新播放" /> &nbsp;&nbsp; -->
+            <button type="button" onclick="autoPlay()" style="font-size:15px;background-color: #96b97d;width: 90px;height: 35px">重新播放</button> &nbsp
+            <!-- <input type="button" onclick="closePlay()" value="播放/暂停" /> -->
+            <button type="button" onclick="closePlay()" style="font-size:15px;background-color: #96b97d;width: 90px;height: 35px">播放/暂停</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <font size="5"><label for="gtscore">得分：</label><label for="showscore">{{pred}}</label></font>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <font size="5"><label for="flscore">满分：</label><label for="fillscore">5</label></font>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <font size="5"><label for="stime">耗时：</label><label for="showtime">{{endtime}}</label></font>
+        </div>                
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form-inline">
+                    <div class="row">
+                    <div class="col-xs-6">
+                       <button type="button" class="btn btn-default" style="font-size:16px;background-color: #96b97d;width: 96px;height: 38px">标准文本：</button>
+                    </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="panel-body" id="showtext1">
+                    <!-- <textarea class="form-control" style="font-size:18px" id="textareaCode" name="textareaCode">        {{ stdlines }}
+                    </textarea> -->
+                    <!-- {% for stdline in end_stdwords %}
+                        {% if stdline == "<future>" %}
+                            <font style="font-size:16px;color:green">{{ stdline }}</font>
+                        {% else %}
+                            <font style="font-size:16px;color:black">{{ stdline }}</font>
+                        {% endif %} 
+                    {% endfor %} -->
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form-inline">
+                    <div class="row">
+                    <div class="col-xs-6">
+                       <button type="button" class="btn btn-default" style="font-size:16px;background-color: #96b97d;width: 96px;height: 38px">识别文本：</button>
+                    </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="panel-body" id="showtext2">
+                    <!-- <textarea class="form-control" style="font-size:18px" id="textareaCode" name="textareaCode">      {{ end_regwords }}
+                    </textarea> -->
+                </div>
+            </div>
+        </div>
+	</div>
+
+	<footer>
+		<div class="row">
+			<div class="col-sm-12">
+        <div style="text-align: center;">
+<!-- 右侧滚动条 -->
+        <ins class="adsbygoogle"
+            style="display:inline-block;min-width:300px;max-width:970px;width:100%;height:90px"
+            data-ad-client="ca-pub-5751451760833794"
+            data-ad-slot="6979016065">
+        </ins>
+        <hr>
+		<p>Copyright © 2018<a target="_blank" href="">海云天科技-创新研究院</a></p>
+        </div>
+			</div>
+		</div>
+	</footer>
+</div>
+
+</body>
+</html>
