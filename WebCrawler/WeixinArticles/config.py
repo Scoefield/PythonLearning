@@ -1,0 +1,2 @@
+KEYWORD = '风景'
+COUNT_MAX = 5
