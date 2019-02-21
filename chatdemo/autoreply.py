@@ -23,8 +23,8 @@ def get_info(message):
 
 @itchat.msg_register(itchat.content.TEXT)
 def auto_reply(msg):
-    defaultReply = "I know"
-    realFriend = itchat.search_friends(name='張任強')
+    # defaultReply = "I know"
+    realFriend = itchat.search_friends(name='不会放电的皮卡丘')
     # print(realFriend)
     realFriendName = realFriend[0]['UserName']
     # print(realFriendName)
